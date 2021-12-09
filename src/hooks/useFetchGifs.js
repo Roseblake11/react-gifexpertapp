@@ -1,27 +1,33 @@
-import { useState } from "react";
-import { useEffect } from "react/cjs/react.development";
-import { getGifs } from "../helpers/getGifs";
+import { useState, useEffect } from 'react'
+import { getGifs } from '../helpers/getGifs';
 
 
 export const useFetchGifs = ( category ) => {
+    
+    const [state, setState] = useState({
+        data: [],
+        loading: true
+    });
 
-  const [state, setstate] = useState({
-    data: [],
-    loading: true,
-  });
+    useEffect( () => {
 
-  useEffect( () => {
-  
-    getGifs(category)
-          .then( imgs => {
-            setstate({
-              data: imgs,
-              loading: false
+        getGifs( category )
+            .then( imgs => {
+                
+                setState({
+                    data: imgs,
+                    loading: false
+                });
             })
-          });
 
-  }, [category]);
+    }, [category])
 
-  return state; //{data:[], loading: true}
+
+
+
+    return state; // { data:[], loading: true };
+
 
 }
+
+
